@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>البوابة الوطنية للبكالوريا | BAC Algeria Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Hero Banner -->
+  <header class="hero-header">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="badge-tag">🇩🇿 المنصة الشاملة لجميع الشعب - BAC 2027</span>
+      <h1>بوابة النجاح والتفوق في البكالوريا</h1>
+      <p class="hero-subtext">نتمنى التوفيق والنجاح الساحق لكل طالب وطالبة عبر ربوع الوطن! طريقك نحو الامتياز يبتدئ من هنا.</p>
+      
+      <!-- Live Search -->
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="global-search" placeholder="ابحث عن درس، مادة، أو تمرين..." oninput="searchContent()">
+      </div>
+    </div>
+  </header>
+
+  <div class="main-container">
+
+    <!-- Motivation Banner -->
+    <div class="motivation-card">
+      <i class="fa-solid fa-quote-right quote-icon"></i>
+      <p id="quote-text">"النجاح ليس مصادفة، بل هو عمل جاد، واستمرار، وتعلم، وتضحية، وقبل كل شيء محبة لما تفصله."</p>
+      <span class="quote-author">✨ نتمنى التوفيق والتميز لجميع المترشحين ✨</span>
+    </div>
+
+    <!-- Stream Selection Header -->
+    <section class="section-block">
+      <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> اختر الشعبة الخاصة بك</h2>
+      <div class="stream-selector" id="stream-buttons">
+        <!-- Generated Dynamically -->
+      </div>
+    </section>
+
+    <!-- Global Progress Bar -->
+    <div class="progress-box">
+      <div class="progress-header">
+        <span><i class="fa-solid fa-chart-line"></i> نسبة تقدمك في شعبة <strong id="active-stream-name">--</strong>:</span>
+        <span id="progress-percent-text">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill-bar"></div>
+      </div>
+    </div>
+
+    <!-- Mode Tabs: الدروس | التمارين | المراجعات -->
+    <div class="view-tabs">
+      <button class="tab-btn active" onclick="switchViewMode('lessons', event)">
+        <i class="fa-solid fa-book-open"></i> البرنامج والدروس
+      </button>
+      <button class="tab-btn" onclick="switchViewMode('exercises', event)">
+        <i class="fa-solid fa-pen-ruler"></i> التمارين والحوليات
+      </button>
+      <button class="tab-btn" onclick="switchViewMode('revisions', event)">
+        <i class="fa-solid fa-bolt"></i> المراجعة المركزة
+      </button>
+    </div>
+
+    <!-- Subjects Grid -->
+    <div class="subjects-grid" id="subjects-container">
+      <!-- Generated Dynamically via JS -->
+    </div>
+
+  </div>
+
+  <!-- Global Footer -->
+  <footer class="main-footer">
+    <p>🇩🇿 تم تطوير هذه المنصة لتكون المرجع الأول والشامل لجميع طلاب البكالوريا في الجزائر | نتمنى لكم التوفيق والنجاح 🇩🇿</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
