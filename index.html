@@ -1,84 +1,209 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>البوابة الوطنية للبكالوريا | BAC Algeria Portal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة البكالوريا الجزائرية الشاملة - BAC 2027</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Top Hero Banner -->
-  <header class="hero-header">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <span class="badge-tag">🇩🇿 المنصة الشاملة لجميع الشعب - BAC 2027</span>
-      <h1>بوابة النجاح والتفوق في البكالوريا</h1>
-      <p class="hero-subtext">نتمنى التوفيق والنجاح الساحق لكل طالب وطالبة عبر ربوع الوطن! طريقك نحو الامتياز يبتدئ من هنا.</p>
-      
-      <!-- Live Search -->
-      <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input type="text" id="global-search" placeholder="ابحث عن درس، مادة، أو تمرين..." oninput="searchContent()">
-      </div>
+    <!-- الشريط العلوي والتأثيرات Visuals -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="brand-box">
+                <span class="badge-live">⚡ BAC 2027 ULTIMATE EDITION</span>
+                <h1>منصة البكالوريا الجزائرية الشاملة</h1>
+                <p class="subtitle">المكتبة الكبرى: جميع الدروس، جميع الفصول، التمارين المحلولة بالتفصيل، وأرشيف امتحانات البكالوريا</p>
+            </div>
+            
+            <!-- شريط إحصائيات التطبيق -->
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalLessonsCount">0</span>
+                    <span class="stat-label">درس وملخص</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="totalExercisesCount">0</span>
+                    <span class="stat-label">تمرين بحله</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">19</span>
+                    <span class="stat-label">سنة أرشيف</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 1. شريط اختيار الشعبة -->
+        <section class="section-card">
+            <div class="section-title">
+                <span class="icon">🎓</span>
+                <h3>حدد الشعبة الدراسية</h3>
+            </div>
+            <div class="stream-grid" id="streamGrid">
+                <button class="stream-btn active" onclick="selectStream('languages')">🌐 لغات أجنبية</button>
+                <button class="stream-btn" onclick="selectStream('philo')">📖 آداب وفلسفة</button>
+                <button class="stream-btn" onclick="selectStream('exp')">🧪 علوم تجريبية</button>
+                <button class="stream-btn" onclick="selectStream('math')">📐 رياضيات</button>
+                <button class="stream-btn" onclick="selectStream('tm')">⚙️ تقني رياضي</button>
+                <button class="stream-btn" onclick="selectStream('eco')">📊 تسيير واقتصاد</button>
+            </div>
+        </section>
+
+        <!-- 2. تصفية الفصول الدراسية الثلاثة -->
+        <section class="term-filter-wrapper">
+            <span class="filter-label">🎯 الفصل الدراسي:</span>
+            <div class="term-buttons">
+                <button class="term-btn active" onclick="filterTerm('all')">📚 جميع الفصول (1 + 2 + 3)</button>
+                <button class="term-btn" onclick="filterTerm('term1')">1️⃣ الفصل الأول</button>
+                <button class="term-btn" onclick="filterTerm('term2')">2️⃣ الفصل الثاني</button>
+                <button class="term-btn" onclick="filterTerm('term3')">3️⃣ الفصل الثالث</button>
+            </div>
+        </section>
+
+        <!-- 3. شريط التنقل بين أقسام المنصة -->
+        <nav class="main-tabs-nav">
+            <button class="tab-btn active" onclick="switchTab('lessonsTab')">📘 برنامج الدروس والملخصات</button>
+            <button class="tab-btn" onclick="switchTab('exercisesTab')">📝 بنك التمارين الشامل مع التصحيح</button>
+            <button class="tab-btn" onclick="switchTab('bacTab')">🏛️ أرشيف البكالوريات (2008 - 2026)</button>
+        </nav>
+
+        <!-- ================= تبويب 1: الدروس والملخصات ================= -->
+        <section id="lessonsTab" class="tab-content active">
+            <div class="search-and-filter-box">
+                <input type="text" id="lessonSearch" placeholder="🔍 ابحث عن درس، قاعدة جرامار، المقالات الفلسفية، البناء اللغوي..." onkeyup="searchContent()">
+            </div>
+            
+            <div id="subjectsContainer" class="subjects-grid">
+                <!-- يتم توليد البطاقات ديناميكياً بواسطة JavaScript -->
+            </div>
+        </section>
+
+        <!-- ================= تبويب 2: بنك التمارين الشامل ================= -->
+        <section id="exercisesTab" class="tab-content">
+            <div class="exercise-control-bar">
+                <div class="filter-group">
+                    <label>تصفية حسب المادة:</label>
+                    <select id="exerciseSubjectFilter" onchange="renderExercises()">
+                        <option value="all">كل المواد الدراسية</option>
+                        <option value="spanish">اللغة الإسبانية</option>
+                        <option value="french">اللغة الفرنسية</option>
+                        <option value="english">اللغة الإنجليزية</option>
+                        <option value="arabic">الأدب العربي</option>
+                        <option value="philo">الفلسفة</option>
+                        <option value="histgeo">التاريخ والجغرافيا</option>
+                        <option value="islamic">العلوم الإسلامية</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="exercisesContainer" class="exercises-list">
+                <!-- يتم توليد التمارين وحلولها تفاعلياً بواسطة JavaScript -->
+            </div>
+        </section>
+
+        <!-- ================= تبويب 3: أرشيف البكالوريات ================= -->
+        <section id="bacTab" class="tab-content">
+            <div class="bac-archive-box">
+                <div class="archive-header">
+                    <h3>🏛️ السلسلة الذهبية لمواضيع وتصحيحات البكالوريا الرسمية</h3>
+                    <p>المواضيع الوزارية الرسمية الصادرة عن الديوان الوطني للامتحانات والمسابقات مرفقة بالتصحيح النموذجي وسلم التنقيط.</p>
+                </div>
+                <div id="bacYearsGrid" class="years-grid">
+                    <!-- يتم توليد السنوات من 2008 إلى 2026 تلقائياً -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- زر لوحة التحكم والتحرير المباشر داخل التطبيق -->
+    <button class="admin-float-btn" onclick="openAdminModal()">✏️ إضافة / تعديل المحتوى مباشرة</button>
+
+    <!-- النافذة المنبثقة للوحة التعديل الإدارية (Admin Modal) -->
+    <div id="adminModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>⚙️ إضافة محتوى جديد وإدارته في التطبيق</h3>
+                <span class="close-btn" onclick="closeAdminModal()">&times;</span>
+            </div>
+            
+            <form id="adminForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label>نوع العنصر المراد إضافته:</label>
+                    <select id="contentType" onchange="toggleFormFields()">
+                        <option value="lesson">📘 درس / ملخص جديد</option>
+                        <option value="exercise">📝 تمرين تفاعلي مع الحل</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>الشعبة:</label>
+                        <select id="formStream">
+                            <option value="languages">🌐 لغات أجنبية</option>
+                            <option value="philo">📖 آداب وفلسفة</option>
+                            <option value="exp">🧪 علوم تجريبية</option>
+                            <option value="math">📐 رياضيات</option>
+                            <option value="tm">⚙️ تقني رياضي</option>
+                            <option value="eco">📊 تسيير واقتصاد</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>الفصل الدراسي:</label>
+                        <select id="formTerm">
+                            <option value="term1">1️⃣ الفصل الأول</option>
+                            <option value="term2">2️⃣ الفصل الثاني</option>
+                            <option value="term3">3️⃣ الفصل الثالث</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>المادة:</label>
+                    <select id="formSubject">
+                        <option value="spanish">اللغة الإسبانية</option>
+                        <option value="french">اللغة الفرنسية</option>
+                        <option value="english">اللغة الإنجليزية</option>
+                        <option value="arabic">الأدب العربي</option>
+                        <option value="philo">الفلسفة</option>
+                        <option value="histgeo">التاريخ والجغرافيا</option>
+                        <option value="islamic">العلوم الإسلامية</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>عنوان الدرس أو التمرين:</label>
+                    <input type="text" id="formTitle" placeholder="مثال: درس قواعد Subjuntivo / تمرين الإعراب" required>
+                </div>
+
+                <!-- حقول خاصة بالدروس -->
+                <div id="lessonFields" class="form-group">
+                    <label>رابط التحميل أو الملف (PDF / External Link):</label>
+                    <input type="text" id="formUrl" placeholder="https://..." value="#">
+                </div>
+
+                <!-- حقول خاصة بالتمارين -->
+                <div id="exerciseFields" class="form-group" style="display: none;">
+                    <label>نص السؤال أو التمرين:</label>
+                    <textarea id="formQuestion" rows="4" placeholder="أدخل نص السؤال والتطبيقات هنا..."></textarea>
+                    
+                    <label style="margin-top: 12px;">الإجابة النموذجية والتصحيح المفصل:</label>
+                    <textarea id="formSolution" rows="5" placeholder="أدخل خطوات الحل، الإعراب، أو قواعد التصحيح النموذجية..."></textarea>
+                </div>
+
+                <button type="submit" class="save-btn">💾 حفظ ونشر المحتوى فوراً بالتطبيق</button>
+            </form>
+        </div>
     </div>
-  </header>
 
-  <div class="main-container">
+    <footer>
+        <p>المنصة الوطنية المستقلة لتحضير البكالوريا | جميع الحقوق محفوظة © 2026</p>
+    </footer>
 
-    <!-- Motivation Banner -->
-    <div class="motivation-card">
-      <i class="fa-solid fa-quote-right quote-icon"></i>
-      <p id="quote-text">"النجاح ليس مصادفة، بل هو عمل جاد، واستمرار، وتعلم، وتضحية، وقبل كل شيء محبة لما تفصله."</p>
-      <span class="quote-author">✨ نتمنى التوفيق والتميز لجميع المترشحين ✨</span>
-    </div>
-
-    <!-- Stream Selection Header -->
-    <section class="section-block">
-      <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> اختر الشعبة الخاصة بك</h2>
-      <div class="stream-selector" id="stream-buttons">
-        <!-- Generated Dynamically -->
-      </div>
-    </section>
-
-    <!-- Global Progress Bar -->
-    <div class="progress-box">
-      <div class="progress-header">
-        <span><i class="fa-solid fa-chart-line"></i> نسبة تقدمك في شعبة <strong id="active-stream-name">--</strong>:</span>
-        <span id="progress-percent-text">0%</span>
-      </div>
-      <div class="progress-track">
-        <div class="progress-fill" id="progress-fill-bar"></div>
-      </div>
-    </div>
-
-    <!-- Mode Tabs: الدروس | التمارين | المراجعات -->
-    <div class="view-tabs">
-      <button class="tab-btn active" onclick="switchViewMode('lessons', event)">
-        <i class="fa-solid fa-book-open"></i> البرنامج والدروس
-      </button>
-      <button class="tab-btn" onclick="switchViewMode('exercises', event)">
-        <i class="fa-solid fa-pen-ruler"></i> التمارين والحوليات
-      </button>
-      <button class="tab-btn" onclick="switchViewMode('revisions', event)">
-        <i class="fa-solid fa-bolt"></i> المراجعة المركزة
-      </button>
-    </div>
-
-    <!-- Subjects Grid -->
-    <div class="subjects-grid" id="subjects-container">
-      <!-- Generated Dynamically via JS -->
-    </div>
-
-  </div>
-
-  <!-- Global Footer -->
-  <footer class="main-footer">
-    <p>🇩🇿 تم تطوير هذه المنصة لتكون المرجع الأول والشامل لجميع طلاب البكالوريا في الجزائر | نتمنى لكم التوفيق والنجاح 🇩🇿</p>
-  </footer>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
